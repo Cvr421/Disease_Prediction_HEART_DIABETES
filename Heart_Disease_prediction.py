@@ -26,7 +26,7 @@ Heart_Y= dataframe.iloc[:,-1].values
 
 X_train, X_test,y_train, y_test=train_test_split(Heart_X,Heart_Y,test_size=0.25,random_state=40)
 
-# -----------------------------------
+# ---------------------------------------------------------------------------------------------------------------
 # Logistic Regression
 from sklearn.model_selection import cross_val_score, GridSearchCV
 from sklearn.linear_model import LogisticRegression
@@ -40,8 +40,6 @@ model1=lr.fit(X_train,y_train)
 prediction1=model1.predict(X_test)
 from sklearn.metrics import confusion_matrix
 cm=confusion_matrix(y_test,prediction1)
-cm
-sns.heatmap(cm, annot=True,cmap='winter',linewidths=0.3, linecolor='black',annot_kws={"size": 20})
 TP=cm[0][0]
 TN=cm[1][1]
 FN=cm[1][0]
@@ -53,7 +51,7 @@ print("classification_report",classification_report(y_test, prediction1))
 
 
 
-# ----------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------
 # Decision Tree
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.tree import DecisionTreeClassifier
@@ -63,8 +61,6 @@ cv_scores = cross_val_score(tree_model, Heart_X, Heart_Y, cv=10, scoring='accura
 m=tree_model.fit(Heart_X,Heart_Y )
 prediction=m.predict(X_test)
 cm= confusion_matrix(y_test,prediction)
-sns.heatmap(cm, annot=True,cmap='winter',linewidths=0.3, linecolor='black',annot_kws={"size": 20})
-# plt.show()
 print(classification_report(y_test, prediction))
 TP=cm[0][0]
 TN=cm[1][1]
@@ -73,3 +69,24 @@ FP=cm[0][1]
 print('Testing Accuracy for Decision Tree:',(TP+TN)/(TP+TN+FN+FP))
 
 print('Testing Precision for Decision Tree:',(TP/(TP+FP)))
+
+
+# -------------------------------------------------------------------------------------------------------------------------
+
+# Random Forest Classifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+rfc=RandomForestClassifier(n_estimators=500,criterion='entropy',max_depth=8,min_samples_split=5)
+model3 = rfc.fit(X_train, y_train)
+prediction3 = model3.predict(X_test)
+cm3=confusion_matrix(y_test, prediction3)
+sns.heatmap(cm3, annot=True,cmap='winter',linewidths=0.3, linecolor='black',annot_kws={"size": 20})
+TP=cm3[0][0]
+TN=cm3[1][1]
+FN=cm3[1][0]
+FP=cm3[0][1]
+print(round(accuracy_score(prediction3,y_test)*100,2))
+print('Testing Accuracy for Random Forest:',(TP+TN)/(TP+TN+FN+FP))
+print('Testing Precision for Random Forest:',(TP/(TP+FP)))
+print(classification_report(y_test, prediction3))
