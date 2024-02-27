@@ -91,7 +91,7 @@ print('Testing Accuracy for Random Forest:',(TP+TN)/(TP+TN+FN+FP))
 print('Testing Precision for Random Forest:',(TP/(TP+FP)))
 print(classification_report(y_test, prediction3))
 
-
+#------------------------------------------------------------------------------------------------------------------
 #  Neural network
 
 from sklearn.neural_network import MLPClassifier
@@ -104,7 +104,14 @@ accuracy_nn = accuracy_score(y_test, prediction5)
 print(f'Neural Network Accuracy: {accuracy_nn:.2f}')
 print('Classification Report:\n', classification_report(y_test, prediction5))
 
-# plt.figure(figsize=(6, 4))
-# sns.heatmap(confusion_matrix(y_test, prediction5), annot=True, fmt='d', cmap=sns.color_palette(['#3366cc', '#993399']))
-# plt.title('Confusion Matrix - Neural Network')
-# plt.show()
+# Checking Patient Heart problem 
+
+# age,sex,cp,trtbps,chol,fbs,restecg,thalachh,exng,oldpeak,slp,caa,thall,output
+input=(93,2,0,332,193,1.2,1,6.2,4.8,7.1,3.4,1.4,2)
+input_as_numpy=np.asarray(input)
+input_reshaped=input_as_numpy.reshape(1,-1)
+pre1=tree_model.predict(input_reshaped)
+if(pre1==1): 
+  print("The patient seems to be have heart disease:(")
+else:
+  print("The patient seems to be Normal:)")
