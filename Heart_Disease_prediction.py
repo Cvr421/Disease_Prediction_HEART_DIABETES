@@ -46,5 +46,30 @@ TP=cm[0][0]
 TN=cm[1][1]
 FN=cm[1][0]
 FP=cm[0][1]
-print('Testing Accuracy for Logistic Regression:',(TP+TN)/(TP+TN+FN+FP))
-print('Testing Precision for Logistic Regression:',(TP/(TP+FP)))
+# print('Testing Accuracy for Logistic Regression:',(TP+TN)/(TP+TN+FN+FP))
+# print('Testing Precision for Logistic Regression:',(TP/(TP+FP)))
+from sklearn.metrics import classification_report
+print("classification_report",classification_report(y_test, prediction1))
+
+
+
+# ----------------------------------------------------------------
+# Decision Tree
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.tree import DecisionTreeClassifier
+
+tree_model = DecisionTreeClassifier(max_depth=5,criterion='entropy')
+cv_scores = cross_val_score(tree_model, Heart_X, Heart_Y, cv=10, scoring='accuracy')
+m=tree_model.fit(Heart_X,Heart_Y )
+prediction=m.predict(X_test)
+cm= confusion_matrix(y_test,prediction)
+sns.heatmap(cm, annot=True,cmap='winter',linewidths=0.3, linecolor='black',annot_kws={"size": 20})
+# plt.show()
+print(classification_report(y_test, prediction))
+TP=cm[0][0]
+TN=cm[1][1]
+FN=cm[1][0]
+FP=cm[0][1]
+print('Testing Accuracy for Decision Tree:',(TP+TN)/(TP+TN+FN+FP))
+
+print('Testing Precision for Decision Tree:',(TP/(TP+FP)))
