@@ -90,3 +90,21 @@ print(round(accuracy_score(prediction3,y_test)*100,2))
 print('Testing Accuracy for Random Forest:',(TP+TN)/(TP+TN+FN+FP))
 print('Testing Precision for Random Forest:',(TP/(TP+FP)))
 print(classification_report(y_test, prediction3))
+
+
+#  Neural network
+
+from sklearn.neural_network import MLPClassifier
+model_nn = MLPClassifier(random_state=42, max_iter=500)
+model_nn=rfc.fit(X_train, y_train)
+
+prediction5 = model_nn.predict(X_test)
+
+accuracy_nn = accuracy_score(y_test, prediction5)
+print(f'Neural Network Accuracy: {accuracy_nn:.2f}')
+print('Classification Report:\n', classification_report(y_test, prediction5))
+
+# plt.figure(figsize=(6, 4))
+# sns.heatmap(confusion_matrix(y_test, prediction5), annot=True, fmt='d', cmap=sns.color_palette(['#3366cc', '#993399']))
+# plt.title('Confusion Matrix - Neural Network')
+# plt.show()
