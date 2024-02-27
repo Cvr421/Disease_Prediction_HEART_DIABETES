@@ -104,7 +104,24 @@ accuracy_nn = accuracy_score(y_test, prediction5)
 print(f'Neural Network Accuracy: {accuracy_nn:.2f}')
 print('Classification Report:\n', classification_report(y_test, prediction5))
 
-# Checking Patient Heart problem 
+# Support Vector Machines(SVM)
+
+from sklearn.svm import SVC
+svm=SVC(C=12,kernel='linear')
+model4=svm.fit(X_train,y_train)
+prediction4=model4.predict(X_test)
+cm4= confusion_matrix(y_test,prediction4)
+sns.heatmap(cm4, annot=True,cmap='winter',linewidths=0.3, linecolor='black',annot_kws={"size": 20})
+TP=cm4[0][0]
+TN=cm4[1][1]
+FN=cm4[1][0]
+FP=cm4[0][1]
+  
+print('Testing Accuracy for SVM:',(TP+TN)/(TP+TN+FN+FP))
+print('Testing Precision for Random Forest:',(TP/(TP+FP)))
+print(classification_report(y_test, prediction4))
+
+# Checking Patient Heart problem using Decision tree classifier
 
 # age,sex,cp,trtbps,chol,fbs,restecg,thalachh,exng,oldpeak,slp,caa,thall,output
 # Taking usr input of Heart attack causing Parameters
