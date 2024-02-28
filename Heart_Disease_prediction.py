@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings 
-
+from flask import Flask, request, jsonify
 from sklearn.model_selection import train_test_split
 
 dataframe=pd.read_csv("heart.csv")
@@ -123,51 +123,92 @@ print(classification_report(y_test, prediction4))
 
 # Checking Patient Heart problem using Decision tree classifier
 
-# age,sex,cp,trtbps,chol,fbs,restecg,thalachh,exng,oldpeak,slp,caa,thall,output
-# Taking usr input of Heart attack causing Parameters
-user_input = []
-for i in range(len(dataframe.columns) - 1):  # Exclude the last column (Outcome)
-    column_name = dataframe.columns[i]  # Get the name of the column
-    value = float(input("Enter no of {}: ".format(column_name)))
-    user_input.append(value)
+def submit_form():
+  importance_data_dict = {}
+  advice_text=""
+  
+  if request.is_json:
+    form_data = request.get_json()  # Get JSON data from the request
+    # user_input = form_data['user_input']  # Extract user input from form data
+    
+    user_input_list = [float(value) for value in form_data.values()]
+#   --------------------------------------------------------------------------  
+    # Now predicting the Heart Disease on the bases of usr input
+    input_data = np.array(user_input_list).reshape(1, -1)
+    pre1 = tree_model.predict(input_data) #Here tree_model is Dicesion tree classifier algo
+    if pre1 == 1:
+         response_text="The patient seems to be have heart disease...Based on the analysis of your input data, the following features are highly contributing to the risk of Heart Failiar"
+         advice_text="  We recommend monitoring and controlling these factors to manage your risk of Heart Disease"
+         feature_importances = tree_model.feature_importances_
+         importance_df = pd.DataFrame({'Feature': dataframe.columns[:-1], 'Importance': feature_importances})
+         importance_df = importance_df.sort_values(by='Importance', ascending=False)
+         importance_data_dict = importance_df.to_dict()
+    # 5. Provide Recommendations
+        
+         
+    else:
+         response_text="The patient seems to be Normal..."
+    
+    # For now, just return the received data
+    return jsonify({
+                    # "received_data": user_input,
+                    #  "pridicted_result": response_text
+                    "pridicted_result" :response_text,
+                    "importance_data": importance_data_dict,
+                    "advice_text":advice_text
+                 })
+  else:
+      return jsonify({'error':'invalid request format, expected JSON'})
 
-# Now predicting the Heart Disease on the bases of usr input
-input_data = np.array(user_input).reshape(1, -1)
-pre1 = tree_model.predict(input_data)
+
+
+# Taking user data through terminal
+
+# # age,sex,cp,trtbps,chol,fbs,restecg,thalachh,exng,oldpeak,slp,caa,thall,output
+# # Taking usr input of Heart attack causing Parameters
+# user_input = []
+# for i in range(len(dataframe.columns) - 1):  # Exclude the last column (Outcome)
+#     column_name = dataframe.columns[i]  # Get the name of the column
+#     value = float(input("Enter no of {}: ".format(column_name)))
+#     user_input.append(value)
+
+# # Now predicting the Heart Disease on the bases of usr input
+# input_data = np.array(user_input).reshape(1, -1)
+# pre1 = tree_model.predict(input_data)
 
 
   
-feature_importances = tree_model.feature_importances_
-importance_df = pd.DataFrame({'Feature': dataframe.columns[:-1], 'Importance': feature_importances})
-importance_df = importance_df.sort_values(by='Importance', ascending=False)
-print("Most Causing factor for Heart Attack")
-print(importance_df)
+# feature_importances = tree_model.feature_importances_
+# importance_df = pd.DataFrame({'Feature': dataframe.columns[:-1], 'Importance': feature_importances})
+# importance_df = importance_df.sort_values(by='Importance', ascending=False)
+# print("Most Causing factor for Heart Attack")
+# print(importance_df)
 
 
 
-if pre1 == 1:
-    feature_contributions = tree_model.predict_proba(input_data)[0]  # Get the probabilities for each class
-    # The first element of feature_contributions corresponds to the probability of class 0 (no diabetes)
-    # The second element corresponds to the probability of class 1 (diabetes)
+# if pre1 == 1:
+#     feature_contributions = tree_model.predict_proba(input_data)[0]  # Get the probabilities for each class
+#     # The first element of feature_contributions corresponds to the probability of class 0 (no diabetes)
+#     # The second element corresponds to the probability of class 1 (diabetes)
     
-    # We can consider the difference between the probabilities as the contribution of each feature to the predicted risk of diabetes
-    # The higher the difference, the more influential the feature is in predicting diabetes
-    feature_contribution_diff = feature_contributions[1] - feature_contributions[0]
-    print("feature contribution diff",feature_contribution_diff)
-    # 4. Identify Highly Contributing Features
-    # We can consider features with higher contribution differences as highly contributing features
-    highly_contributing_features = []
-    for i, feature_name in enumerate(dataframe.columns[:-1]):  # Exclude the last column (Outcome)
-        if feature_contribution_diff >= 0.1:  # Adjust the threshold as needed
-            highly_contributing_features.append(feature_name)
+#     # We can consider the difference between the probabilities as the contribution of each feature to the predicted risk of diabetes
+#     # The higher the difference, the more influential the feature is in predicting diabetes
+#     feature_contribution_diff = feature_contributions[1] - feature_contributions[0]
+#     print("feature contribution diff",feature_contribution_diff)
+#     # 4. Identify Highly Contributing Features
+#     # We can consider features with higher contribution differences as highly contributing features
+#     highly_contributing_features = []
+#     for i, feature_name in enumerate(dataframe.columns[:-1]):  # Exclude the last column (Outcome)
+#         if feature_contribution_diff >= 0.1:  # Adjust the threshold as needed
+#             highly_contributing_features.append(feature_name)
 
-    # 5. Provide Recommendations
-    if len(highly_contributing_features) > 0:
-        print("Based on the analysis of your input data, the following features are highly contributing to the risk of Heart Failiar:")
-        for feature_name in highly_contributing_features:
-            print("- {}".format(feature_name))
-        print("We recommend monitoring and controlling these factors to manage your risk of Heart Disease.")
-    else:
-        print("No specific features were identified as highly contributing to the risk of Heart Disease based on your input data.")
-else:
-    print("Based on the analysis of your input data, it seems that you have a low risk of Heart Disease.")
+#     # 5. Provide Recommendations
+#     if len(highly_contributing_features) > 0:
+#         print("Based on the analysis of your input data, the following features are highly contributing to the risk of Heart Failiar:")
+#         for feature_name in highly_contributing_features:
+#             print("- {}".format(feature_name))
+#         print("We recommend monitoring and controlling these factors to manage your risk of Heart Disease.")
+#     else:
+#         print("No specific features were identified as highly contributing to the risk of Heart Disease based on your input data.")
+# else:
+#     print("Based on the analysis of your input data, it seems that you have a low risk of Heart Disease.")
