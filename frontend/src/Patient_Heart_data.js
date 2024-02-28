@@ -24,7 +24,25 @@ export function Patient_Heart_data() {
     thallium: ''
   });
  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const stringifiedData = JSON.stringify(formData);
 
+    try {
+      const response = await fetch('http://localhost:5000/submit_form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: stringifiedData
+      });
+      const data = await response.json();
+      
+      console.log(data); // Handle response from server
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
  
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,7 +78,7 @@ export function Patient_Heart_data() {
     <>
       <div className='data'>
         <div className='formdata'>
-          <Form className="patientdata" >
+          <Form className="patientdata"   onSubmit={handleSubmit}>
             <div className="row">
               <Link className="link" to="/">Home</Link>
               <h5>HEART REPORT DETAIL</h5>
