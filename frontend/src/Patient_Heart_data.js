@@ -4,6 +4,7 @@ import './Patient_data.css'
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Predicted_Heart_result } from "./Predicted_Heart_result"
 
 
 
@@ -23,13 +24,19 @@ export function Patient_Heart_data() {
     caa: '',
     thallium: ''
   });
+
+  const [predictedResult, setPredictedResult] = useState(null)
+  const [advice_text, setAdviceText] = useState()
+  const [Impfeature, setImpfeature] = useState([])
+  const [Impvalue, setImpValue] = useState([])
+
  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const stringifiedData = JSON.stringify(formData);
 
     try {
-      const response = await fetch('http://localhost:5000/submit_form', {
+      const response = await fetch('http://localhost:5000/submit_form_heart', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -37,7 +44,12 @@ export function Patient_Heart_data() {
         body: stringifiedData
       });
       const data = await response.json();
-      
+      setPredictedResult(data.pridicted_result);
+      setAdviceText(data.advice_text);
+      const features = data.importance_data.Feature;
+      setImpfeature(features);
+      const value = data.importance_data.Importance;
+      setImpValue(value);
       console.log(data); // Handle response from server
     } catch (error) {
       console.error('Error:', error);
@@ -308,7 +320,7 @@ export function Patient_Heart_data() {
         </div>
 
       </div>
-      
+      <Predicted_Heart_result predictedResult={predictedResult} advice_text={advice_text} Impfeature={Impfeature} Impvalue={Impvalue} />
     </>
   );
 }
