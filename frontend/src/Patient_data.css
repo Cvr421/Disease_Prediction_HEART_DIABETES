@@ -1,0 +1,55 @@
+body{
+   background-color: #fbfdfb;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#000101 ;
+ 
+}
+.data{
+  /* background-image: url('https://media.istockphoto.com/id/1165046681/photo/healthcare-business-graph-and-medical-examination-and-businessman-analyzing-data-and-growth.jpg?s=1024x1024&w=is&k=20&c=FRQ6JdTcMQISCHRFneO8zmP7YkKlsXcRblmtym0jLnk='); */
+}
+
+.formdata{
+    border-radius: 20px;
+    background-color:#ffab00;
+    height: 35rem;
+    width: 70rem;
+    padding: 10px;
+    margin: 10px;
+    
+}
+form button{
+    margin-top: 20px;
+}
+
+.patientdata .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+.patientdata .col-sm {
+    flex-grow: 1;
+  }
+
+.row h5{
+    /* margin-left: 80px; */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size:x-large;
+    font-weight: bolder;
+}
+form button{
+    margin-inline-end:10px;
+  margin-top: 30px;
+}
+.link{
+  color: #000101;
+  font-size: large;
+  font-weight: bold;
+  border-radius: 20px;
+
+  
+}

@@ -7,17 +7,17 @@ from flask import Flask, request, jsonify
 from sklearn.model_selection import train_test_split
 
 dataframe=pd.read_csv("heart.csv")
-dataframe.head(10)
-dataframe.info()
+# dataframe.head(10)
+# dataframe.info()
 
 dataframe.isna().sum()
 plt.figure(figsize=(15,10))
-sns.heatmap(dataframe.corr(),linewidth=.01,annot=True,cmap="winter")
-plt.savefig("CorrelationHeartFigure")
+# sns.heatmap(dataframe.corr(),linewidth=.01,annot=True,cmap="winter")
+# plt.savefig("CorrelationHeartFigure")
 # plt.show()
 
 dataframe.hist(figsize=(12,12))
-plt.savefig("figureplot")
+# plt.savefig("figureplot")
 # plt.show()
 
 # Spliting the data into training set and test set
@@ -47,7 +47,7 @@ FP=cm[0][1]
 # print('Testing Accuracy for Logistic Regression:',(TP+TN)/(TP+TN+FN+FP))
 # print('Testing Precision for Logistic Regression:',(TP/(TP+FP)))
 from sklearn.metrics import classification_report
-print("classification_report",classification_report(y_test, prediction1))
+# print("classification_report",classification_report(y_test, prediction1))
 
 
 
@@ -66,9 +66,9 @@ TP=cm[0][0]
 TN=cm[1][1]
 FN=cm[1][0]
 FP=cm[0][1]
-print('Testing Accuracy for Decision Tree:',(TP+TN)/(TP+TN+FN+FP))
+# print('Testing Accuracy for Decision Tree:',(TP+TN)/(TP+TN+FN+FP))
 
-print('Testing Precision for Decision Tree:',(TP/(TP+FP)))
+# print('Testing Precision for Decision Tree:',(TP/(TP+FP)))
 
 
 # -------------------------------------------------------------------------------------------------------------------------
@@ -86,10 +86,10 @@ TP=cm3[0][0]
 TN=cm3[1][1]
 FN=cm3[1][0]
 FP=cm3[0][1]
-print(round(accuracy_score(prediction3,y_test)*100,2))
-print('Testing Accuracy for Random Forest:',(TP+TN)/(TP+TN+FN+FP))
-print('Testing Precision for Random Forest:',(TP/(TP+FP)))
-print(classification_report(y_test, prediction3))
+# print(round(accuracy_score(prediction3,y_test)*100,2))
+# print('Testing Accuracy for Random Forest:',(TP+TN)/(TP+TN+FN+FP))
+# print('Testing Precision for Random Forest:',(TP/(TP+FP)))
+# print(classification_report(y_test, prediction3))
 
 #------------------------------------------------------------------------------------------------------------------
 #  Neural network
@@ -101,8 +101,8 @@ model_nn=rfc.fit(X_train, y_train)
 prediction5 = model_nn.predict(X_test)
 
 accuracy_nn = accuracy_score(y_test, prediction5)
-print(f'Neural Network Accuracy: {accuracy_nn:.2f}')
-print('Classification Report:\n', classification_report(y_test, prediction5))
+# print(f'Neural Network Accuracy: {accuracy_nn:.2f}')
+# print('Classification Report:\n', classification_report(y_test, prediction5))
 
 # Support Vector Machines(SVM)
 
@@ -117,9 +117,9 @@ TN=cm4[1][1]
 FN=cm4[1][0]
 FP=cm4[0][1]
   
-print('Testing Accuracy for SVM:',(TP+TN)/(TP+TN+FN+FP))
-print('Testing Precision for Random Forest:',(TP/(TP+FP)))
-print(classification_report(y_test, prediction4))
+# print('Testing Accuracy for SVM:',(TP+TN)/(TP+TN+FN+FP))
+# print('Testing Precision for Random Forest:',(TP/(TP+FP)))
+# print(classification_report(y_test, prediction4))
 
 # Checking Patient Heart problem using Decision tree classifier
 

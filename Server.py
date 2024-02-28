@@ -8,11 +8,11 @@ from Heart_Disease_prediction import submit_form
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/submit_form',method=['POST'])
+@app.route('/submit_form_heart',methods=['POST'])
 def predict_heart():
     return submit_form()
 
-@app.route('/submit_form_diabetes', method=['POST'])
+@app.route('/submit_form_diabetes', methods=['POST'])
 def pre_diabetes():
     return diabetes_prediction()
 

@@ -7,7 +7,8 @@ const Header = () => {
     <header id="header" className="d-flex align-items-center">
       <div className="container d-flex align-items-center">
 
-        <h1 className="logo me-auto"><span href="#services">Predict Disease using Machine Learning</span></h1>
+        <h5 className="logo me-auto"><span href="#services">Predict Disease using Machine Learning</span></h5>
+        <span className='clinical'>Not use for Clinical Purposes</span>
         <nav id="navbar" className="navbar">
           <ul>
             <li><a className="nav-link scrollto active" href="#hero">Home</a></li>

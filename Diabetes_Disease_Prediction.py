@@ -8,10 +8,10 @@ from flask import Flask, request, jsonify
 
 
 dataframe=pd.read_csv("diabetes.csv")
-dataframe.head(10)
-dataframe.info()
-dataframe.describe()
-dataframe.isnull().sum()
+# dataframe.head(10)
+# dataframe.info()
+# dataframe.describe()
+# dataframe.isnull().sum()
 
 # Spliting the data 
 Diabetes_X= dataframe.iloc[:,:-1].values
@@ -24,9 +24,9 @@ rfc=RandomForestClassifier(n_estimators=500,criterion='entropy',max_depth=8,min_
 randomFC=RandomForestClassifier()
 randomFC=rfc.fit(x_train,y_train)
 f1_pred=randomFC.predict(x_test) 
-print("Predicted",f1_pred)
+# print("Predicted",f1_pred)
 f1_score=accuracy_score(y_test,f1_pred)*100
-print("Accuracy_RFC",f1_score)
+# print("Accuracy_RFC",f1_score)
 
 
 
@@ -38,8 +38,9 @@ neuralNet = MLPClassifier()
 neuralNet=rfc.fit(x_train, y_train)
 prediction5 = neuralNet.predict(x_test)
 accuracy_nn = accuracy_score(y_test, prediction5)
-print("Accuracy NeuralNET",accuracy_nn)
+# print("Accuracy NeuralNET",accuracy_nn)
 # ---------------------------------------------------------------------------------------------------
+
 
 def diabetes_prediction():
   importance_data_dict = {}
@@ -75,7 +76,7 @@ def diabetes_prediction():
     return jsonify({
                     # "received_data": user_input,
                     #  "pridicted_result": response_text
-                   "pridicted_result" :response_text,
+                    "pridicted_result" :response_text,
                     "importance_data": importance_data_dict,
                     "advice_text":advice_text
                     })

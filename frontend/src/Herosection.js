@@ -17,7 +17,7 @@ const Herosection = () => {
            
             <div className="carousel-container">
               <div className="container">
-                <h2 className="animate__animated animate__fadeInDown">Predict <span>Heart Diabetes</span> Disease</h2>
+                <h2 className="animate__animated animate__fadeInDown">Predict <span>Heart / Diabetes</span> Disease</h2>
                 <p className="animate__animated animate__fadeInUp">
                   We uses the Hundered of real Heart and Diabetes patient data to predict that patient have this disease or not using different Machine Learning Algorithm like Decision tree classifier , Neural network and Super vector Machine(SVM)
                   Logistic Regression and Random Forest classifier to process the data and find the accuracy of prediction.
