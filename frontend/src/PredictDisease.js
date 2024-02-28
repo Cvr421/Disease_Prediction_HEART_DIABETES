@@ -18,7 +18,7 @@ const PredictDisease = () => {
           <div className="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div className="icon-box iconbox-blue">
               <div className="icon">
-                <img width="100" height="100" viewBox="0 0 600 600" src={svgimage1} alt="My SVG Image" />
+                <img width="100" height="100" viewBox="0 0 600 600" src={svgimage1} alt="svg pic" />
 
               </div>
               <span>Click 👇</span>
@@ -33,7 +33,7 @@ const PredictDisease = () => {
           <div className="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div className="icon-box iconbox-blue">
               <div className="icon">
-              <img width="100" height="100" viewBox="0 0 600 600" src={img2} alt="My SVG Image" />
+              <img width="100" height="100" viewBox="0 0 600 600" src={img2} alt="pic" />
 
               </div>
               <span>Click 👇</span>
@@ -49,7 +49,7 @@ const PredictDisease = () => {
           <div className="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div className="icon-box iconbox-blue">
               <div className="icon">
-                <img width="100" height="100" viewBox="0 0 600 600" src={svgimage1} alt="My SVG Image" />
+                <img width="100" height="100" viewBox="0 0 600 600" src={svgimage1} alt="pic" />
 
               </div>
               <span>Click 👇</span>
