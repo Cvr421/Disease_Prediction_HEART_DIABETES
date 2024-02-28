@@ -5,10 +5,14 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Predicted_Heart_result } from "./Predicted_Heart_result"
-
+import CircularProgressWithLabel from './CircularWithValueLabel';
 
 
 export function Patient_Heart_data() {
+  const [loading, setLoading] = useState(false); 
+  const [Results, setResults] = useState(null); 
+
+
   const [formData, setFormData] = useState({
     age: '',
     sex: '',
@@ -33,6 +37,7 @@ export function Patient_Heart_data() {
  
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const stringifiedData = JSON.stringify(formData);
 
     try {
@@ -50,9 +55,18 @@ export function Patient_Heart_data() {
       setImpfeature(features);
       const value = data.importance_data.Importance;
       setImpValue(value);
+      setResults(data);
       console.log(data); // Handle response from server
     } catch (error) {
       console.error('Error:', error);
+    }finally {
+      // setLoading(false); // Set loading to false after response is received
+      
+      setTimeout(() => {
+        setLoading(false);
+      }, 5000);
+
+
     }
   };
  
@@ -320,7 +334,18 @@ export function Patient_Heart_data() {
         </div>
 
       </div>
-      <Predicted_Heart_result predictedResult={predictedResult} advice_text={advice_text} Impfeature={Impfeature} Impvalue={Impvalue} />
+      {loading ? (
+        <div className="loading-container">
+          <CircularProgressWithLabel value={0} />
+        </div>
+      ) : Results ?  (
+      <Predicted_Heart_result 
+      Results={Results} 
+      predictedResult={predictedResult} 
+      advice_text={advice_text} 
+      Impfeature={Impfeature} 
+      Impvalue={Impvalue} />
+      ): null}
     </>
   );
 }

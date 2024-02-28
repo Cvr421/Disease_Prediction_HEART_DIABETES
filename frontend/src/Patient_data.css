@@ -3,13 +3,17 @@ body{
    display: flex;
     justify-content: center;
     align-items: center;
-    background-color:#000101 ;
+    /* background-color:#000101 ; */
  
 }
 .data{
   /* background-image: url('https://media.istockphoto.com/id/1165046681/photo/healthcare-business-graph-and-medical-examination-and-businessman-analyzing-data-and-growth.jpg?s=1024x1024&w=is&k=20&c=FRQ6JdTcMQISCHRFneO8zmP7YkKlsXcRblmtym0jLnk='); */
 }
-
+.loading-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .formdata{
     border-radius: 20px;
     background-color:#ffab00;

@@ -6,10 +6,17 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Predicted_Diabetes_result } from './Predicted_Diabetes_result';
 import './Patient_data.css'
-
+import CircularProgressWithLabel from './CircularWithValueLabel';
 
 
 export function Patient_Diabetes_data() {
+
+  const [loading, setLoading] = useState(false);
+  
+  const [Results, setResults] = useState(null); 
+  
+    
+
   const [DiabetesformData, setDiabetesFormData] = useState({
     Pregnancies: '',
     Glucose: '',
@@ -29,6 +36,7 @@ export function Patient_Diabetes_data() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const stringifiedData = JSON.stringify(DiabetesformData);
 
     try {
@@ -47,9 +55,18 @@ export function Patient_Diabetes_data() {
       setImpDiabetesFeature(features);
       const value = data.importance_data.Importance;
       setImpDiabetesValue(value);
+      setResults(data);
       // Handle response from server
     } catch (error) {
       console.error('Error:', error);
+    }finally {
+      // setLoading(false); // Set loading to false after response is received
+      
+      setTimeout(() => {
+        setLoading(false);
+      }, 5000);
+
+
     }
   };
 
@@ -224,7 +241,21 @@ const handleReset =()=>{
         </Form>
 
       </div>
-  <Predicted_Diabetes_result predictedResult={predictedResult}  DiabetesAdvice_text={DiabetesAdvice_text} ImpDiabetesFeature={ImpDiabetesFeature}  ImpDiabetesValue={ImpDiabetesValue} />
+      {loading ? (
+        <div className="loading-container">
+          <CircularProgressWithLabel value={0} />
+        </div>
+      ) : Results ?  (
+        
+        <Predicted_Diabetes_result   
+        Results={Results} 
+        predictedResult={predictedResult}  
+        DiabetesAdvice_text={DiabetesAdvice_text} 
+        ImpDiabetesFeature={ImpDiabetesFeature}  
+        ImpDiabetesValue={ImpDiabetesValue} 
+        />
+      ): null}
+  
     </div>
   );
 }
