@@ -1,10 +1,47 @@
-# Getting Started with Create React App
+# PREDICT DISEASE USING MACHINE LEARNING
+We uses the Hundered of real Heart and Diabetes patient data to predict that patient have this disease or not using different Machine Learning Algorithm like Decision tree classifier ,Neural network and Super vector Machine(SVM) Logistic Regression and Random Forest classifier to process the data and find the accuracy of prediction. AI and ML technologies hold immense promise in the medical field, particularly for disease prediction and prevention. By leveraging advanced algorithms and vast amounts of healthcare data, these technologies empower healthcare professionals to make more accurate diagnoses, develop personalized treatment plans, and improve patient outcomes.
+
+### `Predict Heart / Diabetes Disease`
+![Screenshot from 2024-02-29 20-47-45](https://github.com/Cvr421/Disease_Prediction_HEART_DIABETES/assets/82499697/7bd619d7-e27b-46df-8c0d-9cd8acbc20a9)
+
+### `Enter your Heart report data`
+![Screenshot from 2024-02-29 20-53-54](https://github.com/Cvr421/Disease_Prediction_HEART_DIABETES/assets/82499697/c77946f4-d3d3-4f67-bac8-0762ec7bae3d)
+
+
+### `Enter your Diabetes data`
+![Screenshot from 2024-02-29 20-53-27](https://github.com/Cvr421/Disease_Prediction_HEART_DIABETES/assets/82499697/f3119efe-5287-4d88-85fe-c05d35314ac6)
+
+
+
+
+# Getting Started 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Prerequisites
 
-## Available Scripts
+What things you need to install the software and how to install them
 
-In the project directory, you can run:
+```
+Python3
+Node js version 18
+React  version 18
+
+```
+### Fork the Repository
+```
+https://github.com/Cvr421/Disease_Prediction_HEART_DIABETES.git
+```
+### Clone the Repository from your github account 
+```
+https://github.com/your_user_name/Disease_Prediction_HEART_DIABETES.git
+```
+### Start the Python Server from root directory
+### `Python3 Server.py`
+
+
+## Start the Frontend 
+
+In the project directory name frontend, you can run:
 
 ### `npm start`
 
