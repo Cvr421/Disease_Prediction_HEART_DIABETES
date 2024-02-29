@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import { Predicted_Diabetes_result } from './Predicted_Diabetes_result';
 import './Patient_data.css'
 import CircularProgressWithLabel from './CircularWithValueLabel';
-
+import HomeIcon from './HomeIcon';
 
 export function Patient_Diabetes_data() {
 
@@ -104,7 +104,8 @@ const handleReset =()=>{
       <div className='formdata'>
         <Form className="Diabetes_patientdata"  onSubmit={handleSubmit} >
           <div className="row">
-          <Link className="link" to="/">Home</Link>
+          {/* <Link className="link" to="/">Home</Link> */}
+          <HomeIcon />
             <h5>DIABETES REPORT DETAIL</h5>
             <Form.Text className="text-muted">
               This is not for clinical Purpose / Please enter only number

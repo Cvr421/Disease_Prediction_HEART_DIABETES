@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Predicted_Heart_result } from "./Predicted_Heart_result"
 import CircularProgressWithLabel from './CircularWithValueLabel';
-
+import HomeIcon from './HomeIcon';
 
 export function Patient_Heart_data() {
   const [loading, setLoading] = useState(false); 
@@ -106,7 +106,8 @@ export function Patient_Heart_data() {
         <div className='formdata'>
           <Form className="patientdata"   onSubmit={handleSubmit}>
             <div className="row">
-              <Link className="link" to="/">Home</Link>
+              {/* <Link className="link" to="/">Home</Link> */}
+              <HomeIcon  />
               <h5>HEART REPORT DETAIL</h5>
               <Form.Text className="text-muted">
                 This is not for clinical Purpose / Please enter only number
