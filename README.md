@@ -5,7 +5,8 @@ We uses the Hundered of real Heart and Diabetes patient data to predict that pat
 ![Screenshot from 2024-02-29 20-47-45](https://github.com/Cvr421/Disease_Prediction_HEART_DIABETES/assets/82499697/7bd619d7-e27b-46df-8c0d-9cd8acbc20a9)
 
 ### `Enter your Heart report data`
-![Screenshot from 2024-02-29 20-53-54](https://github.com/Cvr421/Disease_Prediction_HEART_DIABETES/assets/82499697/c77946f4-d3d3-4f67-bac8-0762ec7bae3d)
+![Screenshot from 2024-02-29 21-37-31](https://github.com/Cvr421/Disease_Prediction_HEART_DIABETES/assets/82499697/92ab9cc3-1702-48d7-9912-c835b7046564)
+
 
 
 ### `Enter your Diabetes data`
